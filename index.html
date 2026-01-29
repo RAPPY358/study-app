@@ -4,14 +4,33 @@
   <meta charset="UTF-8">
   <title>勉強アプリ</title>
   <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* スクロール禁止 */
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-height: 60vh; /* 横画面で収まる */
+}
+
 button {
-  font-size: 24px;      /* 文字デカく */
-  padding: 20px 40px;  /* 押しやすく */
+  font-size: 24px;
+  padding: 20px 40px;
   margin: 10px;
 }
+
+img {
+  display: block;
+  margin: 0 auto;
+}
+    
 .buttons {
   display: flex;
-  justify-content: center; /* 横センター */
+  justify-content: center;
   align-items: center;
 }
 </style>
