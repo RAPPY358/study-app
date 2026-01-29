@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>勉強アプリ</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    img { max-width: 100%; margin-top: 10px; }
+    button { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<h2 id="question">問題</h2>
+<img id="qImg" style="display:none">
+<img id="aImg" style="display:none">
+
+<button onclick="showAnswer()">答えを見る</button>
+<button onclick="nextQuestion()">次の問題</button>
+
+<hr>
+
+<h3>問題を追加</h3>
+<input id="q" placeholder="問題（テキスト）"><br>
+<input id="a" placeholder="答え（テキスト）"><br>
+<button onclick="add()">追加</button>
+
+<script>
+let data = JSON.parse(localStorage.getItem("data") || "[]");
+
+function save() {
+  localStorage.setItem("data", JSON.stringify(data));
+}
+
+function nextQuestion() {
+  if (data.length === 0) return;
+  let d = data[Math.floor(Math.random() * data.length)];
+  document.getElementById("question").innerText = d.q;
+  document.getElementById("aImg").style.display = "none";
+}
+
+function showAnswer() {
+  document.getElementById("aImg").style.display = "block";
+}
+
+function add() {
+  let q = document.getElementById("q").value;
+  let a = document.getElementById("a").value;
+  if (!q || !a) return;
+  data.push({ q, a });
+  save();
+  alert("追加した！");
+}
+</script>
+
+</body>
+</html>
