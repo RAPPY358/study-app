@@ -12,55 +12,33 @@
 <body>
 
 <h2>問題</h2>
-<img id="qImg" style="display:none">
+<img id="qImg">
 
 <button onclick="showAnswer()">答えを見る</button>
 <button onclick="nextQuestion()">次の問題</button>
 
 <img id="aImg" style="display:none">
 
-<hr>
-
-<h3>問題を追加</h3>
-<input id="q" placeholder="問題画像URL"><br>
-<input id="a" placeholder="答え画像URL"><br>
-<button onclick="add()">追加</button>
-
 <script>
-let data = JSON.parse(localStorage.getItem("data") || "[]");
+let data = [];
+let current = null;
 
-function save() {
-  localStorage.setItem("data", JSON.stringify(data));
-}
+fetch("data.json")
+  .then(res => res.json())
+  .then(json => {
+    data = json;
+    nextQuestion();
+  });
 
 function nextQuestion() {
-  if (data.length === 0) {
-    alert("問題がまだないよ");
-    return;
-  }
-  let d = data[Math.floor(Math.random() * data.length)];
-  document.getElementById("qImg").src = d.q;
-  document.getElementById("qImg").style.display = "block";
+  current = data[Math.floor(Math.random() * data.length)];
+  document.getElementById("qImg").src = current.q;
+  document.getElementById("aImg").src = current.a;
   document.getElementById("aImg").style.display = "none";
-  document.getElementById("aImg").src = d.a;
 }
 
 function showAnswer() {
   document.getElementById("aImg").style.display = "block";
-}
-
-function add() {
-  let q = document.getElementById("q").value.trim();
-  let a = document.getElementById("a").value.trim();
-  if (!q || !a) {
-    alert("URLを入れてね");
-    return;
-  }
-  data.push({ q, a });
-  save();
-  document.getElementById("q").value = "";
-  document.getElementById("a").value = "";
-  alert("追加した！");
 }
 </script>
 
