@@ -4,18 +4,26 @@
   <meta charset="UTF-8">
   <title>勉強アプリ</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    img { max-width: 100%; margin-top: 10px; }
-    button { margin-top: 10px; }
-  </style>
+button {
+  font-size: 24px;      /* 文字デカく */
+  padding: 20px 40px;  /* 押しやすく */
+  margin: 10px;
+}
+.buttons {
+  display: flex;
+  justify-content: center; /* 横センター */
+  align-items: center;
+}
+</style>
 </head>
 <body>
 
-<h2>問題</h2>
 <img id="qImg">
 
-<button onclick="showAnswer()">答えを見る</button>
-<button onclick="nextQuestion()">次の問題</button>
+<div class="buttons">
+  <button onclick="showAnswer()">答えを見る</button>
+  <button onclick="nextQuestion()">次の問題</button>
+</div>
 
 <img id="aImg" style="display:none">
 
