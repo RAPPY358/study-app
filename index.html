@@ -11,18 +11,19 @@
 </head>
 <body>
 
-<h2 id="question">問題</h2>
+<h2>問題</h2>
 <img id="qImg" style="display:none">
-<img id="aImg" style="display:none">
 
 <button onclick="showAnswer()">答えを見る</button>
 <button onclick="nextQuestion()">次の問題</button>
 
+<img id="aImg" style="display:none">
+
 <hr>
 
 <h3>問題を追加</h3>
-<input id="q" placeholder="問題（テキスト）"><br>
-<input id="a" placeholder="答え（テキスト）"><br>
+<input id="q" placeholder="問題画像URL"><br>
+<input id="a" placeholder="答え画像URL"><br>
 <button onclick="add()">追加</button>
 
 <script>
@@ -33,10 +34,15 @@ function save() {
 }
 
 function nextQuestion() {
-  if (data.length === 0) return;
+  if (data.length === 0) {
+    alert("問題がまだないよ");
+    return;
+  }
   let d = data[Math.floor(Math.random() * data.length)];
-  document.getElementById("question").innerText = d.q;
+  document.getElementById("qImg").src = d.q;
+  document.getElementById("qImg").style.display = "block";
   document.getElementById("aImg").style.display = "none";
+  document.getElementById("aImg").src = d.a;
 }
 
 function showAnswer() {
@@ -44,11 +50,16 @@ function showAnswer() {
 }
 
 function add() {
-  let q = document.getElementById("q").value;
-  let a = document.getElementById("a").value;
-  if (!q || !a) return;
+  let q = document.getElementById("q").value.trim();
+  let a = document.getElementById("a").value.trim();
+  if (!q || !a) {
+    alert("URLを入れてね");
+    return;
+  }
   data.push({ q, a });
   save();
+  document.getElementById("q").value = "";
+  document.getElementById("a").value = "";
   alert("追加した！");
 }
 </script>
